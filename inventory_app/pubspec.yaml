@@ -79,3 +79,7 @@ flutter:
   assets:
     - assets/images/calendar.png
     - assets/images/inventory_icon.png
+    - assets/images/config_icon.png
+    - assets/images/finance_icon.png
+    - assets/images/product_icon.png
+    - assets/images/user_icon.png

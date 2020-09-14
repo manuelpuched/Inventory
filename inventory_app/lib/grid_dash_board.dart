@@ -5,10 +5,9 @@ class GridDashboard extends StatelessWidget {
 
   String title;
   String subtitle;
-  String event;
   String img;
 
-  GridDashboard({this.title, this.subtitle, this.event, this.img});
+  GridDashboard({this.title, this.subtitle, this.img});
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +49,6 @@ class GridDashboard extends StatelessWidget {
       ),
     );
 
-    final eventHome = Container(
-      child: Text(
-        event,
-        style: GoogleFonts.openSans(
-            textStyle: TextStyle(
-                color: Colors.white70,
-                fontSize: 11,
-                fontWeight: FontWeight.w600)),
-      ),
-    );
-
     return Container(
       margin: EdgeInsets.only(
           left: 10,
@@ -86,7 +74,6 @@ class GridDashboard extends StatelessWidget {
             imgHome,
             titleHome,
             subtitleHome,
-            eventHome
           ],
         ),
       ),
