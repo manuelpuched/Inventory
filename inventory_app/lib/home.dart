@@ -88,7 +88,7 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GridDashboard(title:"Calendario", subtitle:"March, Wednesday", img:"assets/images/use_icon.png"),
+              GridDashboard(title:"Calculadora", subtitle:"Haz Calculos", img:"assets/images/calculator_icon.png"),
               GridDashboard(title:"Configuracion", subtitle:"Configura la app", img:"assets/images/config_icon.png"),
             ],
           )

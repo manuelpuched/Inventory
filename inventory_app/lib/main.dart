@@ -39,6 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
       statusBarColor: Colors.transparent, // transparent status bar
     ));
 
-    return Home(title: "App Inventory");
+    return Home(title: "Bienvenido");
   }
 }
