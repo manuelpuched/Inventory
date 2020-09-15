@@ -4,6 +4,7 @@ import 'package:inventory_app/grid_products.dart';
 import 'package:inventory_app/header_widget.dart';
 import 'package:inventory_app/inventory.dart';
 import 'package:inventory_app/product_view.dart';
+import 'package:inventory_app/settings.dart';
 import 'grid_dash_board.dart';
 
 class Home extends StatelessWidget {
@@ -34,7 +35,7 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GridDashboard(title:"Calculator", subtitle:"Haz Calculos", img:"assets/images/calculator_icon.png", view: CalculatorView(),),
-              GridDashboard(title:"Settings", subtitle:"Configura la app", img:"assets/images/config_icon.png"),
+              GridDashboard(title:"Settings", subtitle:"Configura la app", img:"assets/images/config_icon.png", view: SettingsOnePage(),),
             ],
           )
         ],
