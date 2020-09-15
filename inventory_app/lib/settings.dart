@@ -7,7 +7,7 @@ class SettingsOnePage extends StatefulWidget {
 
 class _SettingsOnePageState extends State<SettingsOnePage> {
   bool _dark = false;
-  bool _verified = true;
+  bool _verified = false;
 
   Brightness _getBrightness() {
     return _dark ? Brightness.dark : Brightness.light;

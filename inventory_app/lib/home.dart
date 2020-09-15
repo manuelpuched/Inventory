@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:inventory_app/calculator_view.dart';
+import 'calculator_view.dart';
 import 'package:inventory_app/grid_products.dart';
 import 'package:inventory_app/header_widget.dart';
 import 'package:inventory_app/inventory.dart';
