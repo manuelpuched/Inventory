@@ -9,12 +9,16 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
   bool _dark = false;
   bool _verified = false;
 
+
   Brightness _getBrightness() {
     return _dark ? Brightness.dark : Brightness.light;
   }
 
   @override
   Widget build(BuildContext context) {
+
+    final color = Color(0xff453658);
+
     return Theme(
       isMaterialAppTheme: false,
       data: ThemeData(
@@ -37,7 +41,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                     elevation: 8.0,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    color: Colors.purple,
+                    color: color,
                     child: ListTile(
                       onTap: () {
                         //open edit profile
@@ -111,28 +115,32 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                     ),
                   ),
                   SwitchListTile(
-                    activeColor: Colors.purple,
+                    activeColor: color,
                     contentPadding: const EdgeInsets.all(0),
                     value: false,
                     title: Text("Received notification"),
                     onChanged: null,
                   ),
                   SwitchListTile(
-                    activeColor: Colors.purple,
+                    activeColor: color,
                     contentPadding: const EdgeInsets.all(0),
-                    value: false,
+                    value: _dark,
                     title: Text("Modo oscuro"),
-                    onChanged: null,
+                    onChanged: (bool value) {
+                      setState(() {
+                        _dark = value;
+                      });
+                    },
                   ),
                   SwitchListTile(
-                    activeColor: Colors.purple,
+                    activeColor: color,
                     contentPadding: const EdgeInsets.all(0),
                     value: false,
                     title: Text("Received Offer Notification"),
                     onChanged: (null),
                   ),
                   SwitchListTile(
-                    activeColor: Colors.purple,
+                    activeColor: color,
                     contentPadding: const EdgeInsets.all(0),
                     value: false,
                     title: Text("Actualizar automaticamente"),
@@ -150,7 +158,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                 height: 80,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.purple,
+                  color: color,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -185,3 +193,4 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
     );
   }
 }
+

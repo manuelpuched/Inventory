@@ -45,9 +45,9 @@ class GridProducts extends StatelessWidget {
               alignment: Alignment(0.8, 1.15),
                 children: [
                   Container(
-                    width: 200,
+                    width: 180,
                     decoration: BoxDecoration(
-                        color: Color(0xff453658), borderRadius: BorderRadius.circular(10)),
+                        color: Color(0xff453658).withAlpha(70), borderRadius: BorderRadius.circular(10)),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -58,9 +58,9 @@ class GridProducts extends StatelessWidget {
                           data.nombre,
                           style: GoogleFonts.openSans(
                               textStyle: TextStyle(
-                                  color: Colors.white,
+                                  color: Color(0xff453658),
                                   fontSize: 16,
-                                  fontWeight: FontWeight.w600)),
+                                  fontWeight: FontWeight.w700)),
                         ),
                         SizedBox(
                           height: 22,
@@ -69,7 +69,7 @@ class GridProducts extends StatelessWidget {
                           data.cantidad.toString()+" "+data.nombre,
                           style: GoogleFonts.openSans(
                               textStyle: TextStyle(
-                                  color: Colors.white70,
+                                  color: Color(0xff453658),
                                   fontSize: 11,
                                   fontWeight: FontWeight.w600)),
                         ),

@@ -37,9 +37,9 @@ class GridDashboard extends StatelessWidget {
         title,
           style: GoogleFonts.openSans(
               textStyle: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xff453658),
                   fontSize: 16,
-                  fontWeight: FontWeight.w600)
+                  fontWeight: FontWeight.w700)
           )
       ),
     );
@@ -52,7 +52,7 @@ class GridDashboard extends StatelessWidget {
         subtitle,
         style: GoogleFonts.openSans(
             textStyle: TextStyle(
-                color: Colors.white38,
+                color: Color(0xff453658),
                 fontSize: 10,
                 fontWeight: FontWeight.w600)),
       ),
@@ -69,7 +69,7 @@ class GridDashboard extends StatelessWidget {
       height: 180,
       width: 180,
       decoration: BoxDecoration(
-          color: Color(0xff453658),
+          color: Color(0xff453658).withAlpha(70),
           borderRadius: BorderRadius.circular(15),
       ),
       child: InkWell(

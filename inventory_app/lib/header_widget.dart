@@ -38,39 +38,64 @@ class HeaderWidget extends StatelessWidget {
       ),
     );
 
-    return Container(
-      margin: EdgeInsets.only(
-          top: 110,
-          bottom: 40
-      ),
-      padding: EdgeInsets.only(
+    return Stack(
+      children: [
+        Container(
+          margin: EdgeInsets.only(
+            top: 105,
+          ),
+          height: 65,
+          width: MediaQuery.of(context).size.width*0.6,
+          decoration: BoxDecoration(
+            color: Color(0xff392850),
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(50),
+              bottomRight: Radius.circular(10)
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xff392850),
+                blurRadius: 10,
+                spreadRadius: 1,
+              )
+            ]
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(
+            top: 110,
+              bottom: 55
+          ),
+        padding: EdgeInsets.only(
           left: 16,
           right: 16
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              titleHome,
-              actualHome,
-            ],
-          ),
-          !button ? Container() :IconButton(
-            alignment: Alignment.topCenter,
-            icon: Icon(
-              Icons.add,
-              color: Colors.white,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                titleHome,
+                actualHome,
+              ],
             ),
-            onPressed: () {
+              !button ? Container() :IconButton(
+              alignment: Alignment.center,
+              icon: Icon(
+              Icons.add,
+              color: Color(0xff392850),
+              ),
+              onPressed: () {
               Navigator.push(context, MaterialPageRoute(
-                builder: (context) => view,
+              builder: (context) => view,
               ));
-            },
-          )
+              },
+        )
         ],
-      ),
+        ),
+        ),
+      ],
     );
   }
 }

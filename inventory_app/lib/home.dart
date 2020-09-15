@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: Color(0xff392850),
+      backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
           HeaderWidget(false, title: "Home",actualView: "DashBoard"),

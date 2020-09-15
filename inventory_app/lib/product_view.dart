@@ -11,7 +11,7 @@ class ProductView extends StatelessWidget {
 
     return Scaffold(
         body: Container(
-          color: Color(0xff392850),
+          color: Colors.white,
           child: Column(
             children: <Widget>[
               HeaderWidget(true, view: NewProduct(), title: "Productos", actualView: "Productos"),
