@@ -1,13 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/home.dart';
+import 'package:inventory_app/inventory.dart';
 
 class GridDashboard extends StatelessWidget {
 
   String title;
   String subtitle;
   String img;
+  var view;
 
-  GridDashboard({this.title, this.subtitle, this.img});
+  GridDashboard({this.title, this.subtitle, this.img, this.view});
+
+  void navigateNewScreen(var view, BuildContext context){
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) => view,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +58,8 @@ class GridDashboard extends StatelessWidget {
       ),
     );
 
+
+
     return Container(
       margin: EdgeInsets.only(
           left: 10,
@@ -59,15 +70,11 @@ class GridDashboard extends StatelessWidget {
       width: 180,
       decoration: BoxDecoration(
           color: Color(0xff453658),
-          borderRadius: BorderRadius.circular(15)
+          borderRadius: BorderRadius.circular(15),
       ),
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
-        onTap: (){
-          Scaffold.of(context).showSnackBar(
-              SnackBar(content: Text(title))
-          );
-        },
+        onTap: () => navigateNewScreen(view, context),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

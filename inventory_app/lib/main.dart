@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory_app/home.dart';
 import 'package:flutter/services.dart';
+import 'package:inventory_app/login.dart';
 
 void main() {
   runApp(MyApp());
@@ -39,6 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
       statusBarColor: Colors.transparent, // transparent status bar
     ));
 
-    return Home(title: "Bienvenido");
+    return Login();
   }
 }
