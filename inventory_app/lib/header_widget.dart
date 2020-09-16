@@ -1,5 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/login/screens/auth/auth.dart';
+import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 class HeaderWidget extends StatelessWidget {
 
@@ -80,7 +83,19 @@ class HeaderWidget extends StatelessWidget {
                 actualHome,
               ],
             ),
-              !button ? Container() :IconButton(
+              !button ? IconButton(
+                alignment: Alignment.center,
+                icon: Icon(
+                  Icons.power_settings_new,
+                  color: Color(0xff392850),
+                ),
+                onPressed: () {
+                  context.signOut();
+                  Navigator.pushReplacement(context, MaterialPageRoute(
+                    builder: (context) => AuthScreen(),
+                  ));
+                },
+              ) :IconButton(
               alignment: Alignment.center,
               icon: Icon(
               Icons.add,

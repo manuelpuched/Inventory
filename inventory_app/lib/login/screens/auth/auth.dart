@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory_app/home.dart';
 import 'package:inventory_app/login/screens/auth/register.dart';
 import 'package:inventory_app/login/screens/auth/sign_in.dart';
 import 'package:inventory_app/login/screens/background_painter.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
+import 'package:animations/animations.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key key}) : super(key:key);
@@ -34,6 +37,11 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
   Widget build(BuildContext context) {
     return Scaffold(
       body: LitAuth.custom(
+        onAuthSuccess: (){
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => Home(),
+          ));
+        },
         child: Stack(
           children: [
             SizedBox.expand(
@@ -43,15 +51,46 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
                 ),
               ),
             ),
-            ValueListenableBuilder<bool>(
-              valueListenable: ShowSignInPage,
-              builder: (context, value, child){
-                return value ? SignIn(
-                  onRegisterClicked: (){
-                    ShowSignInPage.value = false;
+            Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: 800),
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: ShowSignInPage,
+                  builder: (context, value, child){
+                    return PageTransitionSwitcher(
+                      reverse: !value,
+                      duration: Duration(
+                        milliseconds: 800
+                      ),
+                      transitionBuilder: (child, animation, secondaryAnimation){
+                        return SharedAxisTransition(
+                          animation: animation,
+                          secondaryAnimation: secondaryAnimation,
+                          transitionType: SharedAxisTransitionType.vertical,
+                          fillColor: Colors.transparent,
+                          child: child,
+                        );
+                      },
+                      child: value ? SignIn(
+                        key: ValueKey('SignIn'),
+                        onRegisterClicked: (){
+                          context.resetSignInForm();
+                          ShowSignInPage.value = false;
+                          _controller.forward();
+                        },
+                      ) : Register(
+                        key: ValueKey('Register'),
+                        onSignInPressed: (){
+                          context.resetSignInForm();
+                          context.signInWithGithub();
+                          ShowSignInPage.value = true;
+                          _controller.reverse();
+                        },
+                      ),
+                    );
                   },
-                ) : Register();
-              },
+                ),
+              ),
             ),
           ],
         ),

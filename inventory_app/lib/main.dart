@@ -4,6 +4,7 @@ import 'package:inventory_app/home.dart';
 import 'package:flutter/services.dart';
 import 'package:inventory_app/login.dart';
 import 'package:inventory_app/login/screens/auth/auth.dart';
+import 'package:inventory_app/login/screens/splash.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 import 'login/config/palette.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
         //   authenticated: Home(),
         //   unauthenticated: Unauthenticated(),
         // ),
-        home: const AuthScreen(),
+        home: SplashScreen()
       ),
     );
   }

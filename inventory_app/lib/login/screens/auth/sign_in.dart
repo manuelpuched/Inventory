@@ -9,7 +9,10 @@ class SignIn extends StatelessWidget {
 
   final VoidCallback onRegisterClicked;
 
-  SignIn({@required this.onRegisterClicked});
+  const SignIn({
+    Key key,
+    @required this.onRegisterClicked,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
