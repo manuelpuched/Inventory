@@ -6,7 +6,8 @@ import 'package:inventory_app/login.dart';
 import 'package:inventory_app/login/screens/auth/auth.dart';
 import 'package:inventory_app/login/screens/splash.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
-
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'bloc/bloc_user.dart';
 import 'login/config/palette.dart';
 
 void main() {
@@ -17,7 +18,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return LitAuthInit(
+    return BlocProvider(
+      child: MaterialApp(
+        home: Login(),
+      ),
+      bloc: UserBloc(),
+    );
+    /*return LitAuthInit(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Material App',
@@ -34,10 +41,10 @@ class MyApp extends StatelessWidget {
         // home: const LitAuthState(
         //   authenticated: Home(),
         //   unauthenticated: Unauthenticated(),
-        // ),
+        //),
         home: SplashScreen()
       ),
-    );
+    );*/
   }
 }
 

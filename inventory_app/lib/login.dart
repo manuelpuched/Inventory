@@ -1,15 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_signin_button/button_list.dart';
+import 'package:flutter_signin_button/button_view.dart';
 import 'package:inventory_app/home.dart';
 import 'fade_animation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'bloc/bloc_user.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
+
+  @override
+  _LoginState createState() => _LoginState();
+
+}
+
+class _LoginState extends State<Login> {
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  UserBloc userBloc;
+
   @override
   Widget build(BuildContext context) {
+
+    userBloc = BlocProvider.of(context);
+
+    return _handleCurrentSession();
+  }
+
+  Widget _handleCurrentSession(){
+    return StreamBuilder(
+      stream: userBloc.authStatus,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        if(!snapshot.hasData || snapshot.hasError){
+          return loginView();
+        }else{
+          return Home();
+        }
+      },
+    );
+  }
+
+  Widget loginView(){
     return Scaffold(
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Color(0xff392850)
+            color: Color(0xff392850)
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,6 +95,7 @@ class Login extends StatelessWidget {
                                     border: Border(bottom: BorderSide(color: Colors.grey[200]))
                                 ),
                                 child: TextField(
+                                  controller: emailController,
                                   decoration: InputDecoration(
                                       hintText: "Email or Phone number",
                                       hintStyle: TextStyle(color: Colors.grey),
@@ -70,6 +109,7 @@ class Login extends StatelessWidget {
                                     border: Border(bottom: BorderSide(color: Colors.grey[200]))
                                 ),
                                 child: TextField(
+                                  controller: passwordController,
                                   decoration: InputDecoration(
                                       hintText: "Password",
                                       hintStyle: TextStyle(color: Colors.grey),
@@ -92,9 +132,10 @@ class Login extends StatelessWidget {
                           ),
                           child: InkWell(
                             onTap: (){
-                              Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Home(),
-                              ));
+                              userBloc.signInWithEmailAndPassword(
+                                  emailController.text,
+                                  passwordController.text
+                              );
                             },
                             child: Center(
                               child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
@@ -104,35 +145,14 @@ class Login extends StatelessWidget {
                         SizedBox(height: 50,),
                         FadeAnimation(1.7, Text("Continue with social media", style: TextStyle(color: Colors.grey),)),
                         SizedBox(height: 30,),
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: FadeAnimation(1.8, Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.blue
-                                ),
-                                child: Center(
-                                  child: Text("Facebook", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                                ),
-                              )),
-                            ),
-                            SizedBox(width: 30,),
-                            Expanded(
-                              child: FadeAnimation(1.9, Container(
-                                height: 50,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.black
-                                ),
-                                child: Center(
-                                  child: Text("Github", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
-                                ),
-                              )),
-                            )
-                          ],
-                        )
+                        FadeAnimation(
+                          1.8
+                          ,SignInButton(
+                            Buttons.Google,
+                            onPressed: () {
+                              userBloc.signInGoogle();
+                            }),
+                        ),
                       ],
                     ),
                   ),

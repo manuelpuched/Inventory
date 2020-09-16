@@ -1,6 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'calculator_view.dart';
 import 'package:inventory_app/grid_products.dart';
 import 'package:inventory_app/header_widget.dart';
 import 'package:inventory_app/inventory.dart';
@@ -34,10 +33,10 @@ class Home extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GridDashboard(title:"Calculator", subtitle:"Haz Calculos", img:"assets/images/calculator_icon.png", view: CalculatorView(),),
+              GridDashboard(title:"Calculator", subtitle:"Haz Calculos", img:"assets/images/calculator_icon.png"),
               GridDashboard(title:"Settings", subtitle:"Configura la app", img:"assets/images/config_icon.png", view: SettingsOnePage(),),
             ],
-          )
+          ),
         ],
       ),
     );

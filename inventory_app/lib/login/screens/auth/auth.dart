@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:inventory_app/bloc/bloc_user.dart';
 import 'package:inventory_app/home.dart';
 import 'package:inventory_app/login/screens/auth/register.dart';
 import 'package:inventory_app/login/screens/auth/sign_in.dart';
@@ -35,6 +37,9 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
+
+    UserBloc user = BlocProvider.of(context);
+    
     return Scaffold(
       body: LitAuth.custom(
         onAuthSuccess: (){
@@ -82,7 +87,6 @@ class _AuthScreenState extends State<AuthScreen> with SingleTickerProviderStateM
                         key: ValueKey('Register'),
                         onSignInPressed: (){
                           context.resetSignInForm();
-                          context.signInWithGithub();
                           ShowSignInPage.value = true;
                           _controller.reverse();
                         },

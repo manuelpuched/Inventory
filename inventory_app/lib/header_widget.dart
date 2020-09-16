@@ -1,6 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/bloc/bloc_user.dart';
+import 'package:inventory_app/home.dart';
+import 'package:inventory_app/login.dart';
 import 'package:inventory_app/login/screens/auth/auth.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
@@ -13,8 +17,12 @@ class HeaderWidget extends StatelessWidget {
 
   HeaderWidget(this.button, {this.view, this.title, this.actualView});
 
+  UserBloc userBloc;
+
   @override
   Widget build(BuildContext context) {
+
+    userBloc = BlocProvider.of(context);
 
     final titleHome = Container(
       margin: EdgeInsets.only(
@@ -90,10 +98,7 @@ class HeaderWidget extends StatelessWidget {
                   color: Color(0xff392850),
                 ),
                 onPressed: () {
-                  context.signOut();
-                  Navigator.pushReplacement(context, MaterialPageRoute(
-                    builder: (context) => AuthScreen(),
-                  ));
+                  userBloc.signOut();
                 },
               ) :IconButton(
               alignment: Alignment.center,
