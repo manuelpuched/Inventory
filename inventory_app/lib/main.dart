@@ -6,6 +6,7 @@ import 'package:inventory_app/ui/screens/login.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'bloc/bloc_user.dart';
+import 'log.dart';
 
 void main() {
   runApp(MyApp());
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: Login(),
+        //home: LoginPage(),
       ),
       bloc: UserBloc(),
     );
