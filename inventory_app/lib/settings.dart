@@ -5,10 +5,11 @@ import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SettingsOnePage extends StatefulWidget {
+  var name;
   var email;
   var isVerified;
   var id;
-  SettingsOnePage({this.email, this.isVerified, this.id});
+  SettingsOnePage({this.name, this.email, this.isVerified, this.id});
 
   @override
   _SettingsOnePageState createState() => _SettingsOnePageState();

@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/bloc/bloc_user.dart';
-import 'package:inventory_app/home.dart';
-import 'package:inventory_app/login.dart';
-import 'package:inventory_app/login/screens/auth/auth.dart';
-import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 
 class HeaderWidget extends StatelessWidget {
-  String title;
-  String actualView;
-  bool button;
+
+  final String title;
+  final String actualView;
+  final bool button;
   var view;
 
   HeaderWidget(this.button, {this.view, this.title, this.actualView});
@@ -20,10 +17,13 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     userBloc = BlocProvider.of(context);
 
     final titleHome = Container(
-      margin: EdgeInsets.only(bottom: 4),
+      margin: EdgeInsets.only(
+          bottom: 4
+      ),
       child: Text(
         title,
         style: GoogleFonts.openSans(
@@ -52,60 +52,64 @@ class HeaderWidget extends StatelessWidget {
             top: 105,
           ),
           height: 65,
-          width: MediaQuery.of(context).size.width * 0.6,
+          width: MediaQuery.of(context).size.width*0.6,
           decoration: BoxDecoration(
-              color: Color(0xff392850),
-              borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(50),
-                  bottomRight: Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Color(0xff392850),
-                  blurRadius: 10,
-                  spreadRadius: 1,
-                )
-              ]),
+            color: Color(0xff392850),
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(50),
+              bottomRight: Radius.circular(10)
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Color(0xff392850),
+                blurRadius: 10,
+                spreadRadius: 1,
+              )
+            ]
+          ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 110, bottom: 55),
-          padding: EdgeInsets.only(left: 16, right: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  titleHome,
-                  actualHome,
-                ],
-              ),
-              !button
-                  ? IconButton(
-                      alignment: Alignment.center,
-                      icon: Icon(
-                        Icons.power_settings_new,
-                        color: Color(0xff392850),
-                      ),
-                      onPressed: () {
-                        userBloc.signOut();
-                      },
-                    )
-                  : IconButton(
-                      alignment: Alignment.center,
-                      icon: Icon(
-                        Icons.add,
-                        color: Color(0xff392850),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => view,
-                            ));
-                      },
-                    )
-            ],
+          margin: EdgeInsets.only(
+            top: 110,
+              bottom: 55
           ),
+        padding: EdgeInsets.only(
+          left: 16,
+          right: 16
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                titleHome,
+                actualHome,
+              ],
+            ),
+              !button ? IconButton(
+                alignment: Alignment.center,
+                icon: Icon(
+                  Icons.power_settings_new,
+                  color: Color(0xff392850),
+                ),
+                onPressed: () {
+                  userBloc.signOut();
+                },
+              ) :IconButton(
+              alignment: Alignment.center,
+              icon: Icon(
+              Icons.add,
+              color: Color(0xff392850),
+              ),
+              onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+              builder: (context) => view,
+              ));
+              },
+        )
+        ],
+        ),
         ),
       ],
     );

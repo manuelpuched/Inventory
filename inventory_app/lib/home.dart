@@ -9,12 +9,13 @@ import 'package:inventory_app/user.dart';
 import 'grid_dash_board.dart';
 
 class Home extends StatelessWidget {
+
   User user;
-  Home({@required this.user});
+  Home({this.user});
 
   @override
   Widget build(BuildContext context) {
-    print(user.email);
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -60,7 +61,7 @@ class Home extends StatelessWidget {
                 title: "Settings",
                 subtitle: "Configura la app",
                 img: "assets/images/config_icon.png",
-                view: SettingsOnePage(email: user.email,id: user.id,isVerified: user.isVerified,),
+                view: SettingsOnePage(name: user.name,isVerified: user.isVerified,id: user.id,email: user.email,),
               ),
             ],
           ),

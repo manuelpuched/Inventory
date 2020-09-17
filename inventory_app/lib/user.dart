@@ -9,9 +9,9 @@ class User {
   User({
     Key key,
     this.name,
-    @required this.email,
-    @required this.id,
-    @required this.isVerified
+    this.email,
+    this.id,
+    this.isVerified
   });
 
 }

@@ -37,7 +37,7 @@ class _LoginState extends State<Login> {
         if(!snapshot.hasData || snapshot.hasError){
           return loginView();
         }else{
-          return Home(user: userGlobal);
+          return Home(user: userGlobal,);
         }
       },
     );
