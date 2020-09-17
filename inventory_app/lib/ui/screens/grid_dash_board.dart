@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_app/home.dart';
-import 'package:inventory_app/inventory.dart';
+import 'package:inventory_app/ui/screens/home.dart';
+import 'package:inventory_app/ui/screens/inventory.dart';
 
 class GridDashboard extends StatelessWidget {
 

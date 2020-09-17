@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_app/grid_products.dart';
-import 'package:inventory_app/header_widget.dart';
-import 'package:inventory_app/inventory.dart';
-import 'package:inventory_app/product_view.dart';
-import 'package:inventory_app/settings.dart';
-import 'package:inventory_app/user.dart';
+import 'package:inventory_app/ui/widgets/grid_products.dart';
+import 'package:inventory_app/ui/widgets/header_widget.dart';
+import 'package:inventory_app/ui/screens/inventory.dart';
+import 'package:inventory_app/ui/screens/product_view.dart';
+import 'package:inventory_app/ui/screens/settings.dart';
+import 'package:inventory_app/model/user.dart';
 import 'grid_dash_board.dart';
 
 class Home extends StatelessWidget {

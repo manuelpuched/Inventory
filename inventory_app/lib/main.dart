@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_app/home.dart';
+import 'package:inventory_app/ui/screens/home.dart';
 import 'package:flutter/services.dart';
-import 'package:inventory_app/login.dart';
+import 'package:inventory_app/ui/screens/login.dart';
 import 'package:lit_firebase_auth/lit_firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'bloc/bloc_user.dart';

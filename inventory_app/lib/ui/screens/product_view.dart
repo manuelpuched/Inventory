@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:inventory_app/grid_products.dart';
-import 'header_widget.dart';
-import 'package:inventory_app/new_product.dart';
+import 'package:inventory_app/ui/widgets/grid_products.dart';
+import '../widgets/header_widget.dart';
+import 'package:inventory_app/ui/widgets/new_product.dart';
 
 class ProductView extends StatelessWidget {
 
