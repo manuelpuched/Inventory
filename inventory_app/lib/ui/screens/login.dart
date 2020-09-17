@@ -18,7 +18,7 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-  final formKey = new GlobalKey<FormState>();
+  final formKeyLogin = new GlobalKey<FormState>();
 
   String _email;
   String _password;
@@ -95,7 +95,7 @@ class _LoginState extends State<Login> {
                               )]
                           ),
                           child: Form(
-                            key: formKey,
+                            key: formKeyLogin,
                             child: SingleChildScrollView(
                               child: Column(
                                 children: <Widget>[
@@ -206,7 +206,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     child: InkWell(
                                       onTap: (){
-                                        final form = formKey.currentState;
+                                        final form = formKeyLogin.currentState;
                                         if (form.validate()) {
                                           form.save();
                                           userBloc.signInWithEmailAndPassword(
@@ -215,6 +215,9 @@ class _LoginState extends State<Login> {
                                           ).then((FirebaseUser user) {
                                             !user.isEmailVerified ? user.sendEmailVerification() : null;
                                             userGlobal = User(email: user.email, id: user.uid, isVerified: user.isEmailVerified, name: user.displayName);
+                                          }).then((value) {
+                                            _email = "";
+                                            _password = "";
                                           });
                                         }
                                       },

@@ -28,9 +28,9 @@ class Home extends StatelessWidget {
                   subtitle: "Modifica tu perfil",
                   img: "assets/images/user_icon.png"),
               GridDashboard(
-                title: "Inventory",
+                title: "Products",
                 subtitle: "Verifica tu inventario",
-                img: "assets/images/inventory_icon.png",
+                img: "assets/images/product_icon.png",
                 view: Inventory(),
               ),
             ],
@@ -39,9 +39,9 @@ class Home extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               GridDashboard(
-                  title: "Products",
-                  subtitle: "Crea nuevos productos",
-                  img: "assets/images/product_icon.png",
+                  title: "Categories",
+                  subtitle: "Crea categorias",
+                  img: "assets/images/inventory_icon.png",
                   view: ProductView()),
               GridDashboard(
                   title: "Finances",

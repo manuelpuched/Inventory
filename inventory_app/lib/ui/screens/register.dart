@@ -4,6 +4,7 @@ import 'package:flutter_signin_button/button_view.dart';
 import 'package:inventory_app/bloc/bloc_user.dart';
 import 'package:inventory_app/ui/screens/home.dart';
 import 'package:inventory_app/model/user.dart';
+import 'package:inventory_app/ui/screens/login.dart';
 import '../widgets/fade_animation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
@@ -17,22 +18,38 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
 
-  final formKey = new GlobalKey<FormState>();
+  final scaffolkey = new GlobalKey<ScaffoldState>();
+  final formKeyRegister = new GlobalKey<FormState>();
 
   String _email;
   String _password;
 
   UserBloc userBloc;
+  User userGlobal;
 
   @override
   Widget build(BuildContext context) {
 
     userBloc = BlocProvider.of(context);
-    return registerView();
+    return _handleCurrentSession();
+  }
+
+  Widget _handleCurrentSession(){
+    return StreamBuilder(
+      stream: userBloc.authStatus,
+      builder: (BuildContext context, AsyncSnapshot snapshot){
+        if(!snapshot.hasData || snapshot.hasError){
+          return registerView();
+        }else{
+          return Home(user: userGlobal,);
+        }
+      },
+    );
   }
 
   Widget registerView(){
     return Scaffold(
+      key: scaffolkey,
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -80,7 +97,7 @@ class _RegisterState extends State<Register> {
                               )]
                           ),
                           child: Form(
-                              key: formKey,
+                              key: formKeyRegister,
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: <Widget>[
@@ -188,10 +205,21 @@ class _RegisterState extends State<Register> {
                                       ),
                                       child: InkWell(
                                         onTap: (){
-                                          userBloc.createWithEmail(
-                                              _email,
-                                              _password
-                                          );
+                                          final form = formKeyRegister.currentState;
+                                          if (form.validate()) {
+                                            form.save();
+                                            mostrarSnackBar();
+                                            userBloc.createWithEmail(
+                                                _email,
+                                                _password
+                                            ).then((FirebaseUser user) {
+                                              !user.isEmailVerified ? user.sendEmailVerification() : null;
+                                              userGlobal = User(email: user.email, id: user.uid, isVerified: user.isEmailVerified, name: user.displayName);
+                                            }).then((value) {
+                                              _email = "";
+                                              _password = "";
+                                            });
+                                          }
                                         },
                                         child: Center(
                                           child: Text("Register", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
@@ -212,7 +240,9 @@ class _RegisterState extends State<Register> {
                           ,SignInButton(
                             Buttons.Google,
                             onPressed: () {
-                              userBloc.signInGoogle();
+                              userBloc.signInGoogle().then((FirebaseUser user) {
+                                userGlobal = User(email: user.email, id: user.uid, isVerified: user.isEmailVerified, name: user.displayName);
+                              });
                             }),
                         ),
                       ],
@@ -225,5 +255,12 @@ class _RegisterState extends State<Register> {
         ),
       ),
     );
+  }
+
+  mostrarSnackBar() {
+    final snackBar = SnackBar(
+      content: Text('Usuario Registrado'),
+    );
+    scaffolkey.currentState.showSnackBar(snackBar);
   }
 }
