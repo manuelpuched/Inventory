@@ -90,7 +90,7 @@ class HeaderWidget extends StatelessWidget {
               !button ? IconButton(
                 alignment: Alignment.center,
                 icon: Icon(
-                  Icons.power_settings_new,
+                  Icons.exit_to_app,
                   color: Color(0xff392850),
                 ),
                 onPressed: () {

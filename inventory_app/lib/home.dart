@@ -12,7 +12,6 @@ class Home extends StatelessWidget {
 
   User user;
   Home({this.user});
-
   @override
   Widget build(BuildContext context) {
 

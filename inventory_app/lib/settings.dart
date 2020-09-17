@@ -154,32 +154,6 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                 ],
               ),
             ),
-            Positioned(
-              bottom: -20,
-              left: -20,
-              child: Container(
-                width: 80,
-                height: 80,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Color(0xff453658),
-                  shape: BoxShape.circle,
-                ),
-              ),
-            ),
-            Positioned(
-              bottom: 00,
-              left: 00,
-              child: IconButton(
-                icon: Icon(
-                  Icons.power_settings_new,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  //log out
-                },
-              ),
-            )
           ],
         ),
       ),

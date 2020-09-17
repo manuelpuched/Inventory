@@ -15,12 +15,20 @@ class UserBloc implements Bloc{
     return _firebaseAuthAPI.emailAndPasswordSignIn(email, password);
   }
 
+  Future<FirebaseUser> createWithEmailPassword(String email, String password){
+    return _firebaseAuthAPI.emailAndPasswordCreate(email, password);
+  }
+
   Future<FirebaseUser> signInGoogle(){
     return signInFirebase();
   }
 
   Future<FirebaseUser> signInWithEmailAndPassword(String email, String password){
     return signInEmailPassword(email, password);
+  }
+
+  Future<FirebaseUser> createWithEmail(String email, String password){
+    return createWithEmailPassword(email, password);
   }
 
   signOut(){

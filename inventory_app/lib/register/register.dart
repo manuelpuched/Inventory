@@ -1,50 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
+import 'package:inventory_app/bloc/bloc_user.dart';
 import 'package:inventory_app/home.dart';
-import 'package:inventory_app/register/register.dart';
 import 'package:inventory_app/user.dart';
-import 'fade_animation.dart';
+import '../fade_animation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'bloc/bloc_user.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
-class Login extends StatefulWidget {
+class Register extends StatefulWidget {
 
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   UserBloc userBloc;
-  User userGlobal;
 
   @override
   Widget build(BuildContext context) {
 
     userBloc = BlocProvider.of(context);
-    return _handleCurrentSession();
+    return registerView();
   }
 
-  Widget _handleCurrentSession(){
-    return StreamBuilder(
-      stream: userBloc.authStatus,
-      builder: (BuildContext context, AsyncSnapshot snapshot){
-        if(!snapshot.hasData || snapshot.hasError){
-          return loginView();
-        }else{
-          return Home(user: userGlobal,);
-        }
-      },
-    );
-  }
-
-  Widget loginView(){
+  Widget registerView(){
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -60,7 +45,7 @@ class _LoginState extends State<Login> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  FadeAnimation(1, Text("Login", style: TextStyle(color: Colors.white, fontSize: 40),)),
+                  FadeAnimation(1, Text("Register", style: TextStyle(color: Colors.white, fontSize: 40),)),
                   SizedBox(height: 10,),
                   FadeAnimation(1.3, Text("Welcome", style: TextStyle(color: Colors.white, fontSize: 18),)),
                 ],
@@ -122,13 +107,10 @@ class _LoginState extends State<Login> {
                             ],
                           ),
                         )),
-                        SizedBox(height: 40,),
-                        FadeAnimation(1.5, Text("Forgot Password?", style: TextStyle(color: Colors.grey),)),
+                        SizedBox(height: 30,),
                         FadeAnimation(1.6, FlatButton(onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => Register(),
-                          ));
-                        }, child: Text("Create an Account", style: TextStyle(color: Colors.grey),))),
+                          Navigator.pop(context);
+                        }, child: Text("Go Back", style: TextStyle(color: Colors.grey),))),
                         SizedBox(height: 20,),
                         FadeAnimation(1.7, Container(
                           height: 50,
@@ -139,16 +121,13 @@ class _LoginState extends State<Login> {
                           ),
                           child: InkWell(
                             onTap: (){
-                              userBloc.signInWithEmailAndPassword(
+                              userBloc.createWithEmail(
                                   emailController.text,
                                   passwordController.text
-                              ).then((FirebaseUser user) {
-                                !user.isEmailVerified ? user.sendEmailVerification() : null;
-                                userGlobal = User(email: user.email, id: user.uid, isVerified: user.isEmailVerified, name: user.displayName);
-                              });
+                              );
                             },
                             child: Center(
-                              child: Text("Login", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                              child: Text("Register", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
                             ),
                           ),
                         )),
@@ -160,9 +139,7 @@ class _LoginState extends State<Login> {
                           ,SignInButton(
                             Buttons.Google,
                             onPressed: () {
-                              userBloc.signInGoogle().then((FirebaseUser user) {
-                                userGlobal = User(email: user.email, id: user.uid, isVerified: user.isEmailVerified, name: user.displayName);
-                              });
+                              userBloc.signInGoogle();
                             }),
                         ),
                       ],

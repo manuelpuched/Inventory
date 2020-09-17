@@ -36,6 +36,7 @@ dependencies:
   google_sign_in:
   generic_bloc_provider:
   flutter_signin_button:
+  http:
 
 dev_dependencies:
   flutter_test:
