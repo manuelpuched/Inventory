@@ -5,36 +5,63 @@ import 'package:inventory_app/header_widget.dart';
 import 'package:inventory_app/inventory.dart';
 import 'package:inventory_app/product_view.dart';
 import 'package:inventory_app/settings.dart';
+import 'package:inventory_app/user.dart';
 import 'grid_dash_board.dart';
 
 class Home extends StatelessWidget {
+  User user;
+  Home({@required this.user});
 
   @override
   Widget build(BuildContext context) {
+    print(user.email);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
         children: <Widget>[
-          HeaderWidget(false, title: "Home",actualView: "DashBoard"),
+          HeaderWidget(false, title: "Home", actualView: "DashBoard"),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GridDashboard(title:"Profile", subtitle:"Modifica tu perfil", img:"assets/images/user_icon.png"),
-              GridDashboard(title:"Inventory", subtitle:"Verifica tu inventario", img:"assets/images/inventory_icon.png", view: Inventory(),),
+              GridDashboard(
+                  title: "Profile",
+                  subtitle: "Modifica tu perfil",
+                  img: "assets/images/user_icon.png"),
+              GridDashboard(
+                title: "Inventory",
+                subtitle: "Verifica tu inventario",
+                img: "assets/images/inventory_icon.png",
+                view: Inventory(),
+              ),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GridDashboard(title:"Products", subtitle:"Crea nuevos productos", img:"assets/images/product_icon.png", view: ProductView()),
-              GridDashboard(title:"Finances", subtitle:"Controla tus finanzas", img:"assets/images/finance_icon.png"),
+              GridDashboard(
+                  title: "Products",
+                  subtitle: "Crea nuevos productos",
+                  img: "assets/images/product_icon.png",
+                  view: ProductView()),
+              GridDashboard(
+                  title: "Finances",
+                  subtitle: "Controla tus finanzas",
+                  img: "assets/images/finance_icon.png"),
             ],
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GridDashboard(title:"Calculator", subtitle:"Haz Calculos", img:"assets/images/calculator_icon.png"),
-              GridDashboard(title:"Settings", subtitle:"Configura la app", img:"assets/images/config_icon.png", view: SettingsOnePage(),),
+              GridDashboard(
+                  title: "Calculator",
+                  subtitle: "Haz Calculos",
+                  img: "assets/images/calculator_icon.png"),
+              GridDashboard(
+                title: "Settings",
+                subtitle: "Configura la app",
+                img: "assets/images/config_icon.png",
+                view: SettingsOnePage(email: user.email,id: user.id,isVerified: user.isVerified,),
+              ),
             ],
           ),
         ],

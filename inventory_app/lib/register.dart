@@ -8,14 +8,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'bloc/bloc_user.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
-class Login extends StatefulWidget {
+class Register extends StatefulWidget {
 
   @override
-  _LoginState createState() => _LoginState();
+  _RegisterState createState() => _RegisterState();
 
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
