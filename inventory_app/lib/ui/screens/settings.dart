@@ -24,7 +24,6 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Theme(
       isMaterialAppTheme: false,
       data: ThemeData(
@@ -100,7 +99,7 @@ class _SettingsOnePageState extends State<SettingsOnePage> {
                             Icons.verified_user,
                             color: widget.isVerified ? Colors.green : Colors.redAccent,
                           ),
-                          title: Text("Verificar Cuenta"),
+                          title: widget.isVerified ? Text("Cuenta Verificada") : Text("Verificar Cuenta"),
                           trailing: Icon(Icons.keyboard_arrow_right),
                           onTap: () {
                             //open change location

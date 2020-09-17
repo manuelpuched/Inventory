@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_app/ui/widgets/grid_products.dart';
@@ -7,14 +9,39 @@ import 'package:inventory_app/ui/screens/product_view.dart';
 import 'package:inventory_app/ui/screens/settings.dart';
 import 'package:inventory_app/model/user.dart';
 import 'grid_dash_board.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatelessWidget {
 
   User user;
   Home({this.user});
+
+  Future getUser() async{
+    final response = await http.get("http://solvent-initiators.000webhostapp.com/getUser.php");
+    var datauser = json.decode(response.body);
+    List data = datauser.map((entry) => (entry['id_usuario'])).toList();
+    bool existe = false;
+    for(int i = 0; i<data.length; i++){
+      if(data[i] == user.id){
+        existe = true;
+        print("Usuario Antiguo");
+      }
+    }
+    if(existe == false){
+      addUser();
+      print("Usuario Nuevo");
+    }
+  }
+
+  Future addUser() async{
+    final response = await http.post("http://solvent-initiators.000webhostapp.com/addUser.php", body: {
+      "id_usuario" : user.id,
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-
+    getUser();
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(

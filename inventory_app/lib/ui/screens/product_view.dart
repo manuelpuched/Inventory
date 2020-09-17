@@ -14,7 +14,7 @@ class ProductView extends StatelessWidget {
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              HeaderWidget(true, view: NewProduct(), title: "Productos", actualView: "Productos"),
+              HeaderWidget(true, view: NewProduct(), title: "Categorias", actualView: "Categorias"),
               GridProducts()
             ],
           ),
