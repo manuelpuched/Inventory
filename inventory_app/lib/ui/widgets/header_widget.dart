@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/bloc/bloc_user.dart';
+import 'package:inventory_app/model/user.dart';
 
 class HeaderWidget extends StatelessWidget {
 
@@ -11,7 +12,7 @@ class HeaderWidget extends StatelessWidget {
   final bool button;
   var view;
 
-  HeaderWidget(this.button, {this.view, this.title, this.actualView});
+  HeaderWidget({this.button, this.view, this.title, this.actualView});
 
   UserBloc userBloc;
 

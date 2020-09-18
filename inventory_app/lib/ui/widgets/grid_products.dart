@@ -1,8 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:inventory_app/model/user.dart';
+import 'package:inventory_app/repository/my_sql.dart';
 import '../../model/Product.dart';
+import 'package:http/http.dart' as http;
 
 class GridProducts extends StatelessWidget {
+
+  User user;
+
+  GridProducts(this.user);
 
   Product item1 = new Product(
       nombre: "Zapatos",
@@ -21,6 +30,11 @@ class GridProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    List<Product> categorias;
+
+    var data = MySQL(user).getCategory();
+
     List<Product> myList = [item1, item2, item3];
 
     return Flexible(
