@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:inventory_app/model/Product.dart';
+import 'package:inventory_app/model/Category.dart';
 import 'package:inventory_app/model/user.dart';
 
 class MySQL{
 
-  Product categoria;
+  Category categoria;
 
   User user;
   final _urlGetUser = "http://solvent-initiators.000webhostapp.com/getUser.php";
@@ -43,23 +43,22 @@ class MySQL{
     final response = await http.post(_urlAddCategory, body: {
       "id_usuario" : user.id,
       "nombre_categoria" : nombre_categoria,
-      "cantidad" : 0,
+      "cantidad" : "0",
     });
   }
 
-  Future<List<Product>> getCategory() async{
+  Future getCategory() async{
     final response = await http.get(_urlGetCategory);
     var datauser = json.decode(response.body);
-    List<Product> categorias;
+    List<Category> categorias;
     List id_categoria = datauser.map((entry) => (entry['id_categoria'])).toList();
     List id_usuario = datauser.map((entry) => (entry['id_usuario'])).toList();
     List nombre_categoria = datauser.map((entry) => (entry['nombre_categoria'])).toList();
     List cantidad = datauser.map((entry) => (entry['cantidad'])).toList();
 
     for(int i = 0; i<=id_categoria.length; i++){
-      categoria = Product(nombre: nombre_categoria[i], cantidad: cantidad[i]);
+      categoria = Category(nombre: nombre_categoria[i], cantidad: int.parse(cantidad[i]));
       categorias.add(categoria);
     }
-    return categorias;
   }
 }

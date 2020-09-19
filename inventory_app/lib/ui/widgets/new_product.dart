@@ -110,6 +110,7 @@ class NewProductState extends State<NewProduct> {
                                     if (form.validate()) {
                                       form.save();
                                       mostrarSnackBar();
+                                      print(_nombreCategoria);
                                       MySQL(widget.user).addCategory(_nombreCategoria);
                                     }
                                   },

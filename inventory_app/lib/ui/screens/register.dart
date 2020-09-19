@@ -145,14 +145,6 @@ class _RegisterState extends State<Register> {
                                             border: InputBorder.none
                                         ),
                                       ),
-                                      /*child: TextField(
-                                      controller: emailController,
-                                      decoration: InputDecoration(
-                                          hintText: "Email or Phone number",
-                                          hintStyle: TextStyle(color: Colors.grey),
-                                          border: InputBorder.none
-                                      ),
-                                    ),*/
                                     ),
                                     Container(
                                       padding: EdgeInsets.all(10),

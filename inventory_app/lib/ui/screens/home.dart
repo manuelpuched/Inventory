@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_app/repository/my_sql.dart';
-import 'package:inventory_app/ui/widgets/grid_products.dart';
+import 'package:inventory_app/ui/screens/profile.dart';
+import 'package:inventory_app/ui/widgets/grid_category.dart';
 import 'package:inventory_app/ui/widgets/header_widget.dart';
 import 'package:inventory_app/ui/screens/inventory.dart';
-import 'package:inventory_app/ui/screens/product_view.dart';
+import 'package:inventory_app/ui/screens/category_view.dart';
 import 'package:inventory_app/ui/screens/settings.dart';
 import 'package:inventory_app/model/user.dart';
 import 'grid_dash_board.dart';
@@ -19,7 +20,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     MySQL(user).getUser();
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -31,12 +34,12 @@ class Home extends StatelessWidget {
               GridDashboard(
                   title: "Profile",
                   subtitle: "Modifica tu perfil",
-                  img: "assets/images/user_icon.png"),
+                  img: "assets/images/user_icon.png",view: Profile("Perfil"),),
               GridDashboard(
                 title: "Products",
                 subtitle: "Verifica tu inventario",
                 img: "assets/images/product_icon.png",
-                view: Inventory(),
+                view: Profile("Productos"),
               ),
             ],
           ),
@@ -47,11 +50,12 @@ class Home extends StatelessWidget {
                   title: "Categories",
                   subtitle: "Crea categorias",
                   img: "assets/images/inventory_icon.png",
-                  view: ProductView(user)),
+                  view: CategoryView(user)),
               GridDashboard(
                   title: "Finances",
                   subtitle: "Controla tus finanzas",
-                  img: "assets/images/finance_icon.png"),
+                  img: "assets/images/finance_icon.png",
+                view: Profile("Finances"),),
             ],
           ),
           Row(
@@ -60,7 +64,8 @@ class Home extends StatelessWidget {
               GridDashboard(
                   title: "Calculator",
                   subtitle: "Haz Calculos",
-                  img: "assets/images/calculator_icon.png"),
+                  img: "assets/images/calculator_icon.png",
+                view: Profile("Calculator"),),
               GridDashboard(
                 title: "Settings",
                 subtitle: "Configura la app",
