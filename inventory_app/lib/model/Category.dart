@@ -1,8 +1,9 @@
 
 class Category {
+  int id;
   String nombre;
   int cantidad;
 
-  Category({this.nombre, this.cantidad});
+  Category({this.id, this.nombre, this.cantidad});
 
 }

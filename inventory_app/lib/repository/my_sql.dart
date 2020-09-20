@@ -13,6 +13,8 @@ class MySQL{
   final _urlAddUser = "http://solvent-initiators.000webhostapp.com/addUser.php";
   final _urlAddCategory = "http://solvent-initiators.000webhostapp.com/addCategory.php";
   final _urlGetCategory = "http://solvent-initiators.000webhostapp.com/getCategory.php";
+  final _urlDeleteCategory = "http://solvent-initiators.000webhostapp.com/deleteCategory.php";
+  final _urlEditCategory = "http://solvent-initiators.000webhostapp.com/editCategory.php";
 
   MySQL(this.user);
 
@@ -60,5 +62,18 @@ class MySQL{
       categoria = Category(nombre: nombre_categoria[i], cantidad: int.parse(cantidad[i]));
       categorias.add(categoria);
     }
+  }
+
+  Future deleteCategory(int id) async{
+    final response = await http.post(_urlDeleteCategory, body: {
+      "id_categoria" : id.toString(),
+    });
+  }
+
+  Future editCategory(int id, String nombre_categoria) async{
+    final response = await http.post(_urlEditCategory, body: {
+      "id_categoria" : id.toString(),
+      "nombre_categoria" : nombre_categoria,
+    });
   }
 }

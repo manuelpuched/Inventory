@@ -4,6 +4,7 @@ import 'package:inventory_app/repository/my_sql.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
+import 'package:inventory_app/ui/widgets/grid_category.dart';
 
 class NewProduct extends StatefulWidget {
 
@@ -112,6 +113,7 @@ class NewProductState extends State<NewProduct> {
                                       mostrarSnackBar();
                                       print(_nombreCategoria);
                                       MySQL(widget.user).addCategory(_nombreCategoria);
+                                      Navigator.pop(context);
                                     }
                                   },
                                   child: Center(

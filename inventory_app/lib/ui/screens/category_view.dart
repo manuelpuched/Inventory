@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/model/user.dart';
 import 'package:inventory_app/ui/widgets/grid_category.dart';
 import '../widgets/header_widget.dart';
-import 'package:inventory_app/ui/widgets/new_product.dart';
+import 'package:inventory_app/ui/screens/new_product.dart';
 
 class CategoryView extends StatelessWidget {
 
