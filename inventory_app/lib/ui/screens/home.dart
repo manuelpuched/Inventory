@@ -72,7 +72,7 @@ class Home extends StatelessWidget {
                 title: "Settings",
                 subtitle: "Configura la app",
                 img: "assets/images/config_icon.png",
-                view: SettingsOnePage(name: user.name,isVerified: user.isVerified,id: user.id,email: user.email,),
+                //view: SettingsOnePage(name: user.name,isVerified: user.isVerified,id: user.id,email: user.email,),
               ),
             ],
           ),

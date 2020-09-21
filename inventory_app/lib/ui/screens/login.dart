@@ -8,6 +8,7 @@ import '../widgets/fade_animation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../bloc/bloc_user.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:inventory_app/bloc/validaciones.dart';
 
 class Login extends StatefulWidget {
 
@@ -25,6 +26,8 @@ class _LoginState extends State<Login> {
 
   UserBloc userBloc;
   User userGlobal;
+
+  Validaciones val = Validaciones();
 
   @override
   Widget build(BuildContext context) {
@@ -107,38 +110,20 @@ class _LoginState extends State<Login> {
                                     child: TextFormField(
                                       keyboardType: TextInputType.emailAddress,
                                       validator: (String value) {
-                                        if (value.isEmpty) {
+                                        if (val.validarContengaValores(value)) {
                                           return "Campo vacio";
-                                        } else if (!value.contains('@') || !value.contains('.')) {
+                                        } else if (val.validarArroba(value)) {
                                           return 'Email invalido';
-                                        } else if (value.contains('<') ||
-                                            value.contains('>') ||
-                                            value.contains('!') ||
-                                            value.contains('¡') ||
-                                            value.contains('¿') ||
-                                            value.contains('?') ||
-                                            value.contains('»') ||
-                                            value.contains('#') ||
-                                            value.contains(r'$') ||
-                                            value.contains('%') ||
-                                            value.contains('&') ||
-                                            value.contains('‘') ||
-                                            value.contains(' ') ||
-                                            value.contains('(') ||
-                                            value.contains(')') ||
-                                            value.contains('*') ||
-                                            value.contains('+') ||
-                                            value.contains('-') ||
-                                            value.contains(',') ||
-                                            value.contains('/') ||
-                                            value.contains(r'\')) {
-                                          return 'Caracter invalido';
+                                          } else if(val.validarUnSoloArroba(value)){
+                                          return 'Email invalido';
+                                        } else if (val.validarCaracteresEspeciales(value)) {
+                                          return 'Email invalido';
                                         }
                                         return null;
                                       },
                                       onSaved: (value) => _email = value,
                                       decoration: InputDecoration(
-                                          hintText: "Email or Phone number",
+                                          hintText: "Email",
                                           hintStyle: TextStyle(color: Colors.grey),
                                           border: InputBorder.none
                                       ),
@@ -159,18 +144,16 @@ class _LoginState extends State<Login> {
                                     ),
                                     child: TextFormField(
                                       validator: (String value) {
-                                        if (value.isEmpty) {
+                                        if (val.validarContengaValores(value)) {
                                           return "Campo vacio";
-                                        } else if (value.length < 6) {
+                                        } else if (val.validarMinLongitud(value, 6)) {
                                           return 'La contraseña esta muy corta';
-                                        } else {
-                                          for (var i = 0; i < value.length; i++) {
-                                            if (value[i] == value[i].toUpperCase()) {
-                                              return null;
-                                            }
-                                          }
+                                        } else if(val.validarMaxLongitud(value, 20)){
+                                          return 'La contraseña es muy larga';
+                                        }else if(val.validarMinimoUnaMayuscula(value)){
                                           return 'La contraseña debe contener al menos una mayuscula';
                                         }
+                                        return null;
                                       },
                                       onSaved: (value) => _password = value,
                                       decoration: InputDecoration(

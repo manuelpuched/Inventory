@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/model/user.dart';
 import 'package:inventory_app/ui/widgets/grid_category.dart';
 import '../widgets/header_widget.dart';
-import 'package:inventory_app/ui/screens/new_product.dart';
+import 'package:inventory_app/ui/screens/new_category.dart';
 
 class CategoryView extends StatelessWidget {
 
@@ -18,7 +18,7 @@ class CategoryView extends StatelessWidget {
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              HeaderWidget(button: true, view: NewProduct(user), title: "Categorias", actualView: "Categorias"),
+              HeaderWidget(button: true, view: NewCategory(user), title: "Categorias", actualView: "Categorias"),
               GridCategory(user)
             ],
           ),

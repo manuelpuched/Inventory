@@ -1,6 +1,10 @@
 
 class Validaciones {
 
+  bool validarContengaValores(String value){
+    return value.isEmpty;
+  }
+
   bool validarArroba(
       String value) {
     return (!value.contains('@') || !value.contains('.'));
@@ -30,8 +34,12 @@ class Validaciones {
         value.contains(r'\'));
   }
 
-  bool validarLongitud(String value, int longitud) {
+  bool validarMinLongitud(String value, int longitud) {
     return (value.length < longitud);
+  }
+
+  bool validarMaxLongitud(String value, int longitud) {
+    return (value.length > longitud);
   }
 
   bool validarMinimoUnaMayuscula(
@@ -56,7 +64,7 @@ class Validaciones {
     }
   }
 
-  bool validarSoloLetras(String value){
+  bool validarNoContengaNumeros(String value){
     return (value.contains('0') ||
         value.contains('1') ||
         value.contains('2') ||
@@ -68,6 +76,10 @@ class Validaciones {
         value.contains('7') ||
         value.contains('8') ||
         value.contains('9'));
+  }
+
+  bool validarMayorde0(String value){
+    return (int.parse(value) < 1);
   }
 
 }

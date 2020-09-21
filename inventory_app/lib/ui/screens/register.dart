@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 import 'package:inventory_app/bloc/bloc_user.dart';
+import 'package:inventory_app/bloc/validaciones.dart';
 import 'package:inventory_app/ui/screens/home.dart';
 import 'package:inventory_app/model/user.dart';
 import 'package:inventory_app/ui/screens/login.dart';
@@ -26,6 +27,8 @@ class _RegisterState extends State<Register> {
 
   UserBloc userBloc;
   User userGlobal;
+
+  Validaciones val = Validaciones();
 
   @override
   Widget build(BuildContext context) {
@@ -109,32 +112,14 @@ class _RegisterState extends State<Register> {
                                       child: TextFormField(
                                         keyboardType: TextInputType.emailAddress,
                                         validator: (String value) {
-                                          if (value.isEmpty) {
+                                          if (val.validarContengaValores(value)) {
                                             return "Campo vacio";
-                                          } else if (!value.contains('@') || !value.contains('.')) {
+                                          } else if (val.validarArroba(value)) {
                                             return 'Email invalido';
-                                          } else if (value.contains('<') ||
-                                              value.contains('>') ||
-                                              value.contains('!') ||
-                                              value.contains('¡') ||
-                                              value.contains('¿') ||
-                                              value.contains('?') ||
-                                              value.contains('»') ||
-                                              value.contains('#') ||
-                                              value.contains(r'$') ||
-                                              value.contains('%') ||
-                                              value.contains('&') ||
-                                              value.contains('‘') ||
-                                              value.contains(' ') ||
-                                              value.contains('(') ||
-                                              value.contains(')') ||
-                                              value.contains('*') ||
-                                              value.contains('+') ||
-                                              value.contains('-') ||
-                                              value.contains(',') ||
-                                              value.contains('/') ||
-                                              value.contains(r'\')) {
-                                            return 'Caracter invalido';
+                                          } else if(val.validarUnSoloArroba(value)){
+                                            return 'Email invalido';
+                                          } else if (val.validarCaracteresEspeciales(value)) {
+                                            return 'Email invalido';
                                           }
                                           return null;
                                         },
@@ -153,18 +138,16 @@ class _RegisterState extends State<Register> {
                                       ),
                                       child: TextFormField(
                                         validator: (String value) {
-                                          if (value.isEmpty) {
+                                          if (val.validarContengaValores(value)) {
                                             return "Campo vacio";
-                                          } else if (value.length < 6) {
+                                          } else if (val.validarMinLongitud(value, 6)) {
                                             return 'La contraseña esta muy corta';
-                                          } else {
-                                            for (var i = 0; i < value.length; i++) {
-                                              if (value[i] == value[i].toUpperCase()) {
-                                                return null;
-                                              }
-                                            }
+                                          } else if(val.validarMaxLongitud(value, 20)){
+                                            return 'La contraseña es muy larga';
+                                          }else if(val.validarMinimoUnaMayuscula(value)){
                                             return 'La contraseña debe contener al menos una mayuscula';
                                           }
+                                          return null;
                                         },
                                         onSaved: (value) => _password = value,
                                         decoration: InputDecoration(

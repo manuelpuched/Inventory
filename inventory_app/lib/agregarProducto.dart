@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:inventory_app/bloc/validaciones.dart';
 import 'package:inventory_app/repository/my_sql.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -23,6 +24,8 @@ class _agregarProductosState extends State<agregarProductos> {
   int _precioProducto;
   int _cantidad;
   int valueDropDown;
+
+  Validaciones val = Validaciones();
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +65,20 @@ class _agregarProductosState extends State<agregarProductos> {
                                   border: Border(bottom: BorderSide(color: Colors.grey[200]))
                               ),
                               child: TextFormField(
+                                validator: (String value) {
+                                  if (val.validarContengaValores(value)) {
+                                    return "Campo vacio";
+                                  } else if (val.validarMinLongitud(value, 3)) {
+                                    return 'Nombre muy corto';
+                                  } else if(val.validarMaxLongitud(value, 25)){
+                                    return 'Nombre muy largo';
+                                  }else if(val.validarCaracteresEspeciales(value)){
+                                    return 'Solo puedes ingresar letras';
+                                  }else if(val.validarNoContengaNumeros(value)){
+                                    return 'Solo puedes ingresar letras';
+                                  }
+                                  return null;
+                                },
                                 textAlign: TextAlign.center,
                                 maxLength: 20,
                                 onSaved: (value) => _nombreProducto = value,
@@ -77,6 +94,16 @@ class _agregarProductosState extends State<agregarProductos> {
                                   border: Border(bottom: BorderSide(color: Colors.grey[200]))
                               ),
                               child: TextFormField(
+                                validator: (String value) {
+                                  if (val.validarContengaValores(value)) {
+                                    return "Campo vacio";
+                                  } else if(val.validarMaxLongitud(value, 12)){
+                                    return 'Precio no permitido';
+                                  }else if(val.validarCaracteresEspeciales(value)){
+                                    return 'Solo puedes ingresar numeros';
+                                  }
+                                  return null;
+                                },
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 onSaved: (value) => _precioProducto = int.parse(value),
@@ -93,6 +120,16 @@ class _agregarProductosState extends State<agregarProductos> {
                                   border: Border(bottom: BorderSide(color: Colors.grey[200]))
                               ),
                               child: TextFormField(
+                                validator: (String value) {
+                                  if (val.validarContengaValores(value)) {
+                                    return "Campo vacio";
+                                  } else if(val.validarMaxLongitud(value, 8)){
+                                    return 'Valor muy grande';
+                                  }else if(val.validarCaracteresEspeciales(value)){
+                                    return 'Solo puedes ingresar letras';
+                                  }
+                                  return null;
+                                },
                                 keyboardType: TextInputType.number,
                                 textAlign: TextAlign.center,
                                 onSaved: (value) => _cantidad = int.parse(value),

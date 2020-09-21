@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inventory_app/bloc/validaciones.dart';
 import 'package:inventory_app/model/user.dart';
 import 'package:inventory_app/repository/my_sql.dart';
 import 'package:http/http.dart' as http;
@@ -6,21 +7,22 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:inventory_app/ui/widgets/grid_category.dart';
 
-class NewProduct extends StatefulWidget {
+class NewCategory extends StatefulWidget {
 
   User user;
 
-  NewProduct(this.user);
+  NewCategory(this.user);
 
   @override
-  NewProductState createState() => NewProductState();
+  NewCategoryState createState() => NewCategoryState();
 }
 
-class NewProductState extends State<NewProduct> {
+class NewCategoryState extends State<NewCategory> {
   final scaffolkey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
 
   String _nombreCategoria;
+  Validaciones val = Validaciones();
 
   @override
   Widget build(BuildContext context) {
@@ -56,18 +58,18 @@ class NewProductState extends State<NewProduct> {
                             ),
                             child: TextFormField(
                               validator: (String value) {
-                                if (value.isEmpty) {
+                                if (val.validarContengaValores(value)) {
                                   return "Campo vacio";
-                                } else if (value.length < 6) {
-                                  return 'La contraseña esta muy corta';
-                                } else {
-                                  for (var i = 0; i < value.length; i++) {
-                                    if (value[i] == value[i].toUpperCase()) {
-                                      return null;
-                                    }
-                                  }
-                                  return 'La contraseña debe contener al menos una mayuscula';
+                                } else if (val.validarMinLongitud(value, 3)) {
+                                  return 'Nombre muy corto';
+                                } else if(val.validarMaxLongitud(value, 15)){
+                                  return 'Nombre muy largo';
+                                }else if(val.validarCaracteresEspeciales(value)){
+                                  return 'Solo puedes ingresar letras';
+                                }else if(val.validarNoContengaNumeros(value)){
+                                  return 'Solo puedes ingresar letras';
                                 }
+                                return null;
                               },
                               onSaved: (value) => _nombreCategoria = value,
                               decoration: InputDecoration(
