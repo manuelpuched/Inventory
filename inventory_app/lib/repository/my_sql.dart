@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:inventory_app/model/Category.dart';
 import 'package:inventory_app/model/user.dart';
@@ -15,6 +16,8 @@ class MySQL{
   final _urlGetCategory = "http://solvent-initiators.000webhostapp.com/getCategory.php";
   final _urlDeleteCategory = "http://solvent-initiators.000webhostapp.com/deleteCategory.php";
   final _urlEditCategory = "http://solvent-initiators.000webhostapp.com/editCategory.php";
+  final _urlGetProduct = "http://solvent-initiators.000webhostapp.com/getProduct.php";
+  final _urlAddProduct = "http://solvent-initiators.000webhostapp.com/addProduct.php";
 
   MySQL(this.user);
 
@@ -64,6 +67,11 @@ class MySQL{
     }
   }
 
+  Future<List> getCategoryList() async {
+    final response = await http.get("http://solvent-initiators.000webhostapp.com/getCategory.php");
+    return json.decode(response.body);
+  }
+
   Future deleteCategory(int id) async{
     final response = await http.post(_urlDeleteCategory, body: {
       "id_categoria" : id.toString(),
@@ -76,4 +84,30 @@ class MySQL{
       "nombre_categoria" : nombre_categoria,
     });
   }
+
+  List<DropdownMenuItem<int>> loadData( List categorias ) {
+    List<DropdownMenuItem<int>> lista = [];
+    for (int i = 0; i < categorias.length; i++) {
+      lista.add(new DropdownMenuItem(
+        child: new Text(categorias[i]['nombre_categoria']),
+        value: int.parse(categorias[i]['id_categoria']),
+      ));
+    }
+    return lista;
+  }
+
+  Future<List> getProduct() async {
+    final response = await http.get(_urlGetProduct);
+    return json.decode(response.body);
+  }
+
+  Future addProduct(int id_categoria, String nombre_producto, int precio_producto, int cantidad) async {
+    final response = await http.post(_urlAddProduct, body: {
+      "id_categoria" : id_categoria.toString(),
+      "nombre_producto" : nombre_producto,
+      "precio_producto" : precio_producto.toString(),
+      "cantidad" : cantidad.toString(),
+    });
+  }
+
 }

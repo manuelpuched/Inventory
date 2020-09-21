@@ -10,6 +10,7 @@ import 'package:inventory_app/ui/screens/inventory.dart';
 import 'package:inventory_app/ui/screens/category_view.dart';
 import 'package:inventory_app/ui/screens/settings.dart';
 import 'package:inventory_app/model/user.dart';
+import '../../listarProductos.dart';
 import 'grid_dash_board.dart';
 import 'package:http/http.dart' as http;
 
@@ -34,12 +35,13 @@ class Home extends StatelessWidget {
               GridDashboard(
                   title: "Profile",
                   subtitle: "Modifica tu perfil",
-                  img: "assets/images/user_icon.png",view: Profile("Perfil"),),
+                  img: "assets/images/user_icon.png",
+                view: Profile("Perfil"),),
               GridDashboard(
                 title: "Products",
                 subtitle: "Verifica tu inventario",
                 img: "assets/images/product_icon.png",
-                view: Profile("Productos"),
+                view: AppProductos(user),
               ),
             ],
           ),
