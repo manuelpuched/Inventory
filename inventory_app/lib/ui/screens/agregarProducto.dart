@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:inventory_app/bloc/validaciones.dart';
-import 'package:inventory_app/repository/my_sql.dart';
+import 'package:inventory_app/repository/server.dart';
 import 'dart:async';
 import 'dart:convert';
 
-import 'model/user.dart';
+import '../../model/user.dart';
 
 class agregarProductos extends StatefulWidget {
 

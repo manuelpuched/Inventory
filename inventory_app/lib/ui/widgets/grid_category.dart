@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:inventory_app/model/user.dart';
-import 'package:inventory_app/repository/my_sql.dart';
+import 'package:inventory_app/repository/server.dart';
 import 'package:inventory_app/ui/screens/edit_category.dart';
 import '../../model/Category.dart';
 import 'package:http/http.dart' as http;

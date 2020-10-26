@@ -113,10 +113,8 @@ class _LoginState extends State<Login> {
                                         if (val.validarContengaValores(value)) {
                                           return "Campo vacio";
                                         } else if (val.validarArroba(value)) {
-                                          return 'Email invalido';
-                                          } else if(val.validarUnSoloArroba(value)){
-                                          return 'Email invalido';
-                                        } else if (val.validarCaracteresEspeciales(value)) {
+                                          return 'coloca arroba y punto';
+                                          } else if (val.validarCaracteresEspeciales(value)) {
                                           return 'Email invalido';
                                         }
                                         return null;

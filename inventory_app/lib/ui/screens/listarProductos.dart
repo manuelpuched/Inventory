@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:inventory_app/agregarProducto.dart';
-import 'package:inventory_app/detalleProducto.dart';
+import 'package:inventory_app/ui/screens/agregarProducto.dart';
+import 'package:inventory_app/ui/screens/detalleProducto.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-import 'package:inventory_app/repository/my_sql.dart';
+import 'package:inventory_app/repository/server.dart';
 
-import 'model/user.dart';
+import '../../model/user.dart';
 
 class AppProductos extends StatelessWidget {
 

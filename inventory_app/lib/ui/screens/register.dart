@@ -116,8 +116,6 @@ class _RegisterState extends State<Register> {
                                             return "Campo vacio";
                                           } else if (val.validarArroba(value)) {
                                             return 'Email invalido';
-                                          } else if(val.validarUnSoloArroba(value)){
-                                            return 'Email invalido';
                                           } else if (val.validarCaracteresEspeciales(value)) {
                                             return 'Email invalido';
                                           }

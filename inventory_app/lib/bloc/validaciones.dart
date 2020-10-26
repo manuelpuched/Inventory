@@ -5,8 +5,7 @@ class Validaciones {
     return value.isEmpty;
   }
 
-  bool validarArroba(
-      String value) {
+  bool validarArroba(String value) {
     return (!value.contains('@') || !value.contains('.'));
   }
 
@@ -22,8 +21,8 @@ class Validaciones {
         value.contains(r'$') ||
         value.contains('%') ||
         value.contains('&') ||
-        value.contains('‘') ||
-        value.contains(' ') ||
+        value.contains("‘") ||
+        value.contains('"') ||
         value.contains('(') ||
         value.contains(')') ||
         value.contains('*') ||
@@ -31,6 +30,7 @@ class Validaciones {
         value.contains('-') ||
         value.contains(',') ||
         value.contains('/') ||
+        value.contains('=') ||
         value.contains(r'\'));
   }
 
@@ -42,14 +42,14 @@ class Validaciones {
     return (value.length > longitud);
   }
 
-  bool validarMinimoUnaMayuscula(
-      String value) {
+  bool validarMinimoUnaMayuscula(String value) {
     for (var i = 0; i < value.length; i++) {
       if (value[i] == value[i].toUpperCase()) {
-    return true;
+        print(value[i]);
+        return false;
+      }
     }
-  }
-    return false;
+    return true;
   }
 
   bool validarUnSoloArroba(String value) {
