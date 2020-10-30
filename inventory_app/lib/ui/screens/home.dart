@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:inventory_app/repository/server.dart';
+import 'package:inventory_app/ui/screens/calculadora.dart';
+import 'package:inventory_app/ui/screens/conversor.dart';
 import 'package:inventory_app/ui/screens/profile.dart';
 import 'package:inventory_app/ui/widgets/grid_category.dart';
 import 'package:inventory_app/ui/widgets/header_widget.dart';
@@ -36,7 +38,7 @@ class Home extends StatelessWidget {
                   title: "Perfil",
                   subtitle: "Modifica tu perfil",
                   img: "assets/images/user_icon.png",
-                view: Profile("Perfil"),
+                view: ProfilePageDesign(),
               ),
               GridDashboard(
                 title: "Productos",
@@ -58,7 +60,7 @@ class Home extends StatelessWidget {
                   title: "Finanzas",
                   subtitle: "Controla tus finanzas",
                   img: "assets/images/finance_icon.png",
-                view: Profile("Finances"),),
+                view: Conversor(),),
             ],
           ),
           Row(
@@ -68,7 +70,7 @@ class Home extends StatelessWidget {
                   title: "Calculadora",
                   subtitle: "Haz Calculos",
                   img: "assets/images/calculator_icon.png",
-                view: Profile("Calculator"),
+                view: CalcApp(),
               ),
               GridDashboard(
                 title: "Configuracion",

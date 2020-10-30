@@ -37,6 +37,9 @@ dependencies:
   generic_bloc_provider:
   flutter_signin_button:
   http:
+  line_awesome_flutter: ^1.0.1
+  flutter_screenutil: ^1.0.2
+  animated_theme_switcher: ^1.0.5
 
 dev_dependencies:
   flutter_test:
